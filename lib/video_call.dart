@@ -371,48 +371,48 @@
 // import 'package:flutter/material.dart';
 // import 'package:permission_handler/permission_handler.dart'; // Make sure to add this dependency
 // import 'package:http/http.dart' as http;
-//
+
 // class VideoCall extends StatefulWidget {
 //   final String channelName;
-//
+
 //   VideoCall({required this.channelName});
-//
+
 //   @override
 //   _VideoCallState createState() => _VideoCallState();
 // }
-//
+
 // const appId = "70e6d6d77bd845fc9f08854f4f1fc4e3";
 // String token = "007eJxTYHBrj+DgC/j9kTXw+MkJhQz3szKK9aylL0TZrBMv7GgSnKHAYG6QapZilmJunpRiYWKalmyZZmBhYWqSZpJmmJZskmrcZXU3rSGQkWFtvjkjIwMEgvhcDBmpiTklGcmJRakMDABaTx/A";
-//
+
 // class _VideoCallState extends State<VideoCall> {
 //   int? _remoteUid;
 //   bool _localUserJoined = false;
 //   late RtcEngine _engine;
-//
+
 //   @override
 //   void initState() {
 //     super.initState();
 //     initAgora();
 //   }
-//
+
 //   Future<void> initAgora() async {
 //     // Request necessary permissions
 //     var statusMic = await Permission.microphone.request();
 //     var statusCam = await Permission.camera.request();
-//
+
 //     if (statusMic.isDenied || statusCam.isDenied) {
 //       // Handle permissions denied
 //       debugPrint("Microphone or Camera permission denied.");
 //       return;
 //     }
-//
+
 //     // Create the engine
 //     _engine = createAgoraRtcEngine();
 //     await _engine.initialize(RtcEngineContext(
 //       appId: appId,
 //       channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
 //     ));
-//
+
 //     // Register event handlers
 //     _engine.registerEventHandler(
 //       RtcEngineEventHandler(
@@ -444,16 +444,16 @@
 //         },
 //       ),
 //     );
-//
+
 //     // Set the user role to broadcaster
 //     await _engine.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
-//
+
 //     // Enable video
 //     await _engine.enableVideo();
-//
+
 //     // Start video preview
 //     await _engine.startPreview();
-//
+
 //     // Join the channel with a token
 //     await _engine.joinChannel(
 //       token: token,
@@ -467,18 +467,18 @@
 //     );
 //     debugPrint("USER JOINED");
 //   }
-//
+
 //   @override
 //   void dispose() {
 //     super.dispose();
 //     _dispose();
 //   }
-//
+
 //   Future<void> _dispose() async {
 //     await _engine.leaveChannel();
 //     await _engine.release();
 //   }
-//
+
 //   @override
 //   Widget build(BuildContext context) {
 //     final AgoraClient client = AgoraClient(
@@ -488,7 +488,7 @@
 //         tempToken: token,
 //       ),
 //     );
-//
+
 //     return Scaffold(
 //       appBar: AppBar(
 //         title: const Text('Agora Video Call'),
@@ -522,7 +522,7 @@
 //       ),
 //     );
 //   }
-//
+
 //   Widget _remoteVideo() {
 //     if (_remoteUid != null) {
 //       return AgoraVideoView(
@@ -550,6 +550,7 @@ import 'package:agora_uikit/agora_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+// ignore: must_be_immutable
 class VideoCall extends StatefulWidget {
   String channelName = "";
 
