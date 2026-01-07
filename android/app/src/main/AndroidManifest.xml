@@ -1,5 +1,5 @@
-<!--<manifest xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    package="com.example.chatbot1"> &lt;!&ndash; Replace with your package name &ndash;&gt;-->
+<!-- <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+   package="com.example.chatbot1"> &lt;!&ndash; Replace with your package name &ndash;&gt; -->
 
 
 <!--    &lt;!&ndash; Add these lines for camera permission &ndash;&gt;-->
@@ -102,12 +102,17 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <data
+                    android:scheme="https"
+                    android:host="greenbless.com"
+                    android:pathPrefix="/joinMeeting/token" />
             </intent-filter>
         </activity>
 
-        <!-- Flutter metadata required for plugin registration -->
+        Flutter metadata required for plugin registration
         <meta-data
-            android:name="flutterEmbedding"
+           
+            android:name="flutterEmbedding" 
             android:value="2" />
     </application>
 
@@ -118,4 +123,4 @@
             <data android:mimeType="text/plain" />
         </intent>
     </queries>
-</manifest>
+</manifest> 

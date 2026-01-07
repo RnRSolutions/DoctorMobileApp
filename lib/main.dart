@@ -1,117 +1,86 @@
-// // // import 'package:flutter/material.dart';
-// // // import 'screens/chat_screen.dart';
-// // // import 'screens/new_page.dart';
-// // //
-// // //
-// // // void main() {
-// // //   runApp(MyApp());
-// // // }
-// // //
-// // // class MyApp extends StatelessWidget {
-// // //   @override
-// // //   Widget build(BuildContext context) {
-// // //     return MaterialApp(
-// // //       title: 'ChatBot',
-// // //       theme: ThemeData(
-// // //         primarySwatch: Colors.blue,
-// // //       ),
-// // //       home: ChatScreen(),
-// // //     );
-// // //   }
-// // // }
-// // //
-
-// import 'package:chatbot_app/pages/LoginScreen.dart';
-// import 'package:chatbot_app/pages/homepage.dart';
-// import 'package:chatbot_app/screens/register.dart';
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:flutter/material.dart';
-// import 'package:get/get_navigation/src/root/get_material_app.dart';
-// import 'screens/chat_screen.dart';
-// import 'screens/new_page.dart';
-// import 'screens/device_info.dart';
-
-
-
-// // Import Firebase Core
-
-// void main() {
-//   runApp(MyApp());
-// }
-
-// // void main() async {
-// //   WidgetsFlutterBinding.ensureInitialized();
-// //   await Firebase.initializeApp();
-// //   runApp(MyApp());
-// // }
-// // void main() async {
-// //   WidgetsFlutterBinding.ensureInitialized();
-// //   await Firebase.initializeApp();
-// //   runApp(MyApp());
-// // }
-// // void main() async {
-// //   WidgetsFlutterBinding.ensureInitialized();
-// //   await Firebase.initializeApp(
-// //      // Add this if using CLI
-// //   );
-// //   runApp(MyApp());
-// // }
-
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return GetMaterialApp(
-//       title: 'ChatBot',
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//       ),
-//       home:LoginPage(),
-//       routes: {
-//         // '/newPage': (context) => MyForm(),
-//         // '/deviceInfo': (context) => DeviceInfo(),
-
-//       },
-//     );
-//   }
-// }
-
-
-// // import 'package:chatbot_app/pages/homepage.dart';
-// // import 'package:flutter/material.dart';
-// // import 'package:get/get.dart';
-
-
-// // void main() {
-// //   runApp(GetMaterialApp(home: HomePage()));
-// // }
-
-
-
-
-import 'package:chatbot_app/pages/ChatScreen.dart';
-import 'package:chatbot_app/pages/LoginScreen.dart';
-import 'package:chatbot_app/pages/homepage.dart';
+import 'package:chatbot_app/components/welcomeScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
+import 'package:chatbot_app/patient%20screens/PatientRegisterScreen.dart';
+import 'package:chatbot_app/components/RoleSelectionScreen.dart';
+import 'package:chatbot_app/doctor%20screens/DoctorRegisterScreen.dart';
+import 'package:chatbot_app/patient%20screens/ChatScreen.dart';
+import 'package:chatbot_app/meeting_screens/video_conference.dart';
+import 'package:chatbot_app/doctor%20screens/users_chat_list.dart';
+import 'package:chatbot_app/components/LoginScreen.dart';
 
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
-void main() async {
-  runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Get.put<RouteObserver<PageRoute>>(routeObserver);
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: ChatScreen(),
-      //  home:EnterMeetingCodeScreen (),
-      //  home:RegisterScreen (),
-     
-      debugShowCheckedModeBanner: false, // Hide the debug banner
-      // home: ChatScreen(),
+      debugShowCheckedModeBanner: false,
+      navigatorObservers: [Get.find<RouteObserver<PageRoute>>()],
+      initialRoute: '/firstScreen',
+      defaultTransition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 200),
+      getPages: [
+        GetPage(
+          name: '/firstScreen',
+          page: () => const FirstScreen(),
+          transition: Transition.fadeIn,
+          transitionDuration: const Duration(milliseconds: 200),
+        ),
+        GetPage(
+          name: '/roleSelection',
+          page: () => const RoleSelectionScreen(),
+          transition: Transition.fadeIn,
+          transitionDuration: const Duration(milliseconds: 200),
+        ),
+        GetPage(
+          name: '/patientRegister',
+          page: () => RegisterScreen(),
+          transition: Transition.fadeIn,
+          transitionDuration: const Duration(milliseconds: 200),
+        ),
+        GetPage(
+          name: '/doctorRegister',
+          page: () => const DoctorRegisterScreen(),
+          transition: Transition.fadeIn,
+          transitionDuration: const Duration(milliseconds: 200),
+        ),
+        GetPage(
+          name: '/chat',
+          page: () => ChatScreen(
+            greetingMessage: "Welcome back!",
+          ),
+          transition: Transition.fadeIn,
+          transitionDuration: const Duration(milliseconds: 200),
+        ),
+        GetPage(
+          name: '/videoConference',
+          page: () => const VideoConference(),
+          transition: Transition.fadeIn,
+          transitionDuration: const Duration(milliseconds: 200),
+        ),
+        GetPage(
+          name: '/usersList',
+          page: () => const UsersChatList(),
+          transition: Transition.fadeIn,
+          transitionDuration: const Duration(milliseconds: 200),
+        ),
+        GetPage(
+          name: '/login',
+          
+          page: () => const LoginPage(),
+          transition: Transition.fadeIn,
+          transitionDuration: const Duration(milliseconds: 200),
+        ),
+      ],
     );
   }
 }
